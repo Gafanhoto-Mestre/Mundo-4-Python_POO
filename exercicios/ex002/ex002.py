@@ -13,15 +13,24 @@ class MinhaClasse:
     # Métodos de Instância
     def aniversario(self):
         self.idade= self.idade + 1
-    
-    def __str__(self): # Dunder Method
+
+    # Dunder Method
+    def __getstate__(self):
+        return f'ESTADO = Nome:{self.nome}, Idade: {self.idade}'
+
+    # Dunder Method
+    def __str__(self):
         return f'{self.nome} é Gafanhoto(a) e tem {self.idade} anos de idade!'
     
+# ===================================================================================
+g1= MinhaClasse('Mauro', 40)    # Intanciei a classe
+g1.aniversario()                # Método de instância
+
+print(g1)                   # retorna o return de uma função __str__
+print(g1.__dict__)          # Dunder Attribut
+print(g1.__getstate__())    # Methot - (PODE SER PERSONALIZADO)
+print(g1.__class__)         # Dunder Attribut
+print(g1.__doc__)           # Dunder Attribut
 
 
-g1= MinhaClasse('Mauro', 40)         # Intanciei a classe
-g1.aniversario()
-
-for k in g1.__dict__.items():
-    print(f'{k[g1.__dict__]}')
-
+    
