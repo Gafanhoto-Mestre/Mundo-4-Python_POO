@@ -2,8 +2,6 @@ from random import randint
 from rich import print
 from rich.table import Table
 
-
-
 class ContaBancaria:
     """
     Cria uma conta bancária e permite fazer saques e depósitos!
