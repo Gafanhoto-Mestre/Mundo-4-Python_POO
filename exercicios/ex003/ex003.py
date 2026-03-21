@@ -15,10 +15,16 @@ class ContaBancaria:
         tabela.add_column('Titular')
         tabela.add_column('Saldo')
         tabela.add_row(self.id,self.titular,str(self.saldo))
-        print(tabela)
+
 
     def __str__(self):
         return f'{10*"==="}\n>>>Dados da conta<<<\nID:{self.id}\nCliente: {self.titular}\nSaldo Atual: R${self.saldo:,.2f}\n{10*"==="}'
+
+    def __getstate__(self):
+        a = self.id
+        b = self.titular
+        c = self.saldo
+        return (str(a), b, str(c))
         
     def depositar(self,valor):
         self.saldo += valor
@@ -30,5 +36,20 @@ class ContaBancaria:
         self.saldo -= valor
         
 
+
 cliente= ContaBancaria(f'{randint(65,735)}','Mauro', 10000)
 print(cliente)
+
+g1= cliente.__getstate__()
+
+tabel = Table(title="Minha Tabela")
+tabel.add_column('ID')
+tabel.add_column('Titular')
+tabel.add_column('Saldo')
+for c in g1:
+    print(c)
+
+
+
+
+print(g1)
