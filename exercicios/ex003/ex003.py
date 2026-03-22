@@ -11,7 +11,6 @@ class ContaBancaria:
         self.titular= nome
         self.saldo= saldo
 
-
     def __str__(self):
         return f'{10*"==="}\n>>>Dados da conta<<<\n ID: {self.id}\n Cliente: {self.titular}\n Saldo Atual: R${self.saldo:,.2f}\n {10*"==="}'
       
@@ -29,7 +28,7 @@ class ContaBancaria:
             return print (f'Saque de R$ {valor:,.2f} [red]não autorizado[/] saldo insuficiente!\nSeu saldo é R$ {self.saldo:,.2f}')
         self.saldo -= valor
 
-    def Mostrar_Tabela(self):
+    def Tabela(self):
         tabela= Table(title='Minha primeira tabela')
         tabela.add_column('ID')
         tabela.add_column('Titular')
@@ -37,20 +36,32 @@ class ContaBancaria:
 
         for v in lista:
             tabela.add_row(*v)
+
         return print(tabela)
+    
+    def Mostrar_Tabela(self):
+        lista= []
+        while True:
+            identificador= f'{str(randint(500,1000))}'
+            titular= str(input('Digite o nome: '))
+            saldo= str(input('Digite o Saldo: '))
+            cliente= ContaBancaria(identificador, titular, saldo)
+            
+            lista.append(cliente.__dict__.values())
+            resp= input('Continuar? [s/n] ').upper()
+            if resp != 'S':
+                break
 
         
 lista= []
 while True:
-    cad= []
     identificador= f'{str(randint(500,1000))}'
     titular= str(input('Digite o nome: '))
     saldo= str(input('Digite o Saldo: '))
     cliente= ContaBancaria(identificador, titular, saldo)
-    for dic in cliente.__dict__.values():
-        cad.append(str(dic))
-        lista.append(cad[:])
-    resp= input('Continuar? [s/n] ')
+    
+    lista.append(cliente.__dict__.values())
+    resp= input('Continuar? [s/n] ').upper()
     if resp != 'S':
         break
 
