@@ -7,24 +7,18 @@ class ContaBancaria:
     Cria uma conta bancária e permite fazer saques e depósitos!
     """
     def __init__(self,id,nome,saldo=0):
-        tabela = Table(title='[blue]Banco do Brasil[/]')
         self.id= id
         self.titular= nome
         self.saldo= saldo
-        tabela.add_column('ID')
-        tabela.add_column('Titular')
-        tabela.add_column('Saldo')
-        tabela.add_row(self.id,self.titular,str(self.saldo))
 
 
     def __str__(self):
-        return f'{10*"==="}\n>>>Dados da conta<<<\nID:{self.id}\nCliente: {self.titular}\nSaldo Atual: R${self.saldo:,.2f}\n{10*"==="}'
+        return f'{10*"==="}\n>>>Dados da conta<<<\n ID: {self.id}\n Cliente: {self.titular}\n Saldo Atual: R${self.saldo:,.2f}\n {10*"==="}'
+      
 
     def __getstate__(self):
-        a = self.id
-        b = self.titular
-        c = self.saldo
-        return (str(a), b, str(c))
+        return f'Dicionário personalizável!'
+
         
     def depositar(self,valor):
         self.saldo += valor
@@ -34,22 +28,30 @@ class ContaBancaria:
         if valor > self.saldo:
             return print (f'Saque de R$ {valor:,.2f} [red]não autorizado[/] saldo insuficiente!\nSeu saldo é R$ {self.saldo:,.2f}')
         self.saldo -= valor
+
+    def Mostrar_Tabela(self):
+        tabela= Table(title='Minha primeira tabela')
+        tabela.add_column('ID')
+        tabela.add_column('Titular')
+        tabela.add_column('Saldo')
+        for v in len(lista):
+            tabela.add_row(*v)
+        return print(tabela)
         
+    
+
+lista=[]
+while True:
+    identificador= f'{str(randint(500,1000))}'
+    titular= str(input('Digite o nome: '))
+    saldo= str(input('Digite o Saldo: '))
+    cliente= ContaBancaria(identificador, titular, saldo)
+    for dic in cliente.__dict__.values():
+        lista.append(str(dic))
+    resp= input('Continuar? [s/n] ')
+    if resp != 'S':
+        break
+
+cliente.Mostrar_Tabela()
 
 
-cliente= ContaBancaria(f'{randint(65,735)}','Mauro', 10000)
-print(cliente)
-
-g1= cliente.__getstate__()
-
-tabel = Table(title="Minha Tabela")
-tabel.add_column('ID')
-tabel.add_column('Titular')
-tabel.add_column('Saldo')
-for c in g1:
-    print(c)
-
-
-
-
-print(g1)
