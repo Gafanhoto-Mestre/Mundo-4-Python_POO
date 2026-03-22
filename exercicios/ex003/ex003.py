@@ -34,20 +34,22 @@ class ContaBancaria:
         tabela.add_column('ID')
         tabela.add_column('Titular')
         tabela.add_column('Saldo')
-        for v in len(lista):
+
+        for v in lista:
             tabela.add_row(*v)
         return print(tabela)
-        
-    
 
-lista=[]
+        
+lista= []
 while True:
+    cad= []
     identificador= f'{str(randint(500,1000))}'
     titular= str(input('Digite o nome: '))
     saldo= str(input('Digite o Saldo: '))
     cliente= ContaBancaria(identificador, titular, saldo)
     for dic in cliente.__dict__.values():
-        lista.append(str(dic))
+        cad.append(str(dic))
+        lista.append(cad[:])
     resp= input('Continuar? [s/n] ')
     if resp != 'S':
         break
