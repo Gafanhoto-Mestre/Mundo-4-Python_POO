@@ -1,6 +1,7 @@
 from random import randint
 from rich import print
 from rich.table import Table
+from rich import inspect
 
 class ContaBancaria:
     """
@@ -48,5 +49,6 @@ class ContaBancaria:
             if resp in 'nN':
                 break
         cliente.Tabela()
+        inspect(cliente)
     
 ContaBancaria().App()
